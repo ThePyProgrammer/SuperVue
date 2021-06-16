@@ -2,47 +2,55 @@
   <v-container fluid>
     <v-card>
       <v-card-title>
-        <div v-if="name === ''">
-          Your profile
-        </div>
-        <div v-else>
-          Welcome to Vue, {{ name }}
+        <div>
+          Programming Jokes
         </div>
         <v-spacer/>
       </v-card-title>
-      <div class="pa-8">
-        <v-text-field
-          v-model="name"
-          label="Name"
-        >
-        </v-text-field>
-        <div>
-          Output of <code>iss</code>: {{ mainOut }} <br/>
-          Output of <code>home</code>: {{ homeOut }}
-        </div>
-      </div>
+<!--      <v-text-field-->
+<!--        v-model="name"-->
+<!--        label="Search a possible Joke"-->
+<!--      >-->
+<!--      </v-text-field>-->
     </v-card>
+
+    <v-list
+      dense
+      nav>
+      <v-list-item v-for="joke in jokes" v-bind:key="joke">
+<!--        <v-list-item-content>-->
+<!--          <v-list-item-title>-->
+<!--            {{ joke }}-->
+<!--          </v-list-item-title>-->
+<!--        </v-list-item-content>-->
+    <v-card>
+      <v-card-title>
+        <div>
+          <code>{{ joke }}</code>
+        </div>
+        <v-spacer/>
+      </v-card-title>
+    </v-card>
+        <v-spacer />
+      </v-list-item>
+    </v-list>
   </v-container>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import api from "@/api/iss";
+import { getJokes } from "@/api/api";
 
 
 export default Vue.extend({
-  name: "ISS-Home",
+  name: "JokesList",
   data: function () {
     return {
-      name: "",
-      mainOut: "",
-      homeOut: ""
+      jokes: []
     };
   },
   async mounted() {
-    this.mainOut = await api.iss();
-    this.homeOut = api.home();
-    setTimeout(mounted, 1000);
+    this.jokes = await getJokes();
   }
 });
 
