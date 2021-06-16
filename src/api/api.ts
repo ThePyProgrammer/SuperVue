@@ -1,6 +1,9 @@
 import {Location} from "@/types/location";
 import {Position} from "@/types/position";
-import {Joke} from "@/types/joke";
+import {JokeCollection} from "@/types/jokes";
+
+const joke_url = "https://v2.jokeapi.dev/joke/Programming?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single&amount=10";
+const astro_url = "http://api.open-notify.org/astros.json"
 
 async function getLocation(): Promise<Location> {
   return await (await fetch("http://api.open-notify.org/iss-now.json")).json();
@@ -11,11 +14,29 @@ export async function getPosition(): Promise<Position> {
   return new Position(loc.timestamp, loc.iss_position);
 }
 
-async function getJokeData(): Promise<Joke> {
-  return await (await fetch("https://v2.jokeapi.dev/joke/Programming?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single")).json();
+async function getJokeData(): Promise<JokeCollection> {
+  return await (await fetch(joke_url)).json();
 }
 
-export async function getJoke(): Promise<string> {
+async function getJokeDataWithPrompt(prompt: string): Promise<JokeCollection> {
+  return await (await fetch(`https://v2.jokeapi.dev/joke/Programming?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single&contains=${prompt}`)).json();
+}
+
+export async function getJokes(): Promise<string[]> {
   const jokeData = await getJokeData();
-  return jokeData.joke;
+  return jokeData.jokes.map(it => it.joke);
+}
+
+export async function getJokesWithPrompt(prompt: string): Promise<string[]> {
+  const jokeData = await getJokeDataWithPrompt(prompt);
+  return jokeData.jokes.map(it => it.joke);
+}
+
+async function getAstroData(): Promise<AstronautCollection> {
+  return await (await fetch(astro_url)).json();
+}
+
+export async function getAstronauts(): Promise<string[]> {
+  const astroData = await getAstroData();
+  return astroData.people.map(it => it.name);
 }
