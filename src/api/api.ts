@@ -1,9 +1,11 @@
 import {Location} from "@/types/location";
 import {Position} from "@/types/position";
 import {JokeCollection} from "@/types/jokes";
+import {QuotableQuote} from "@/types/quotablequotes";
 
 const joke_url = "https://v2.jokeapi.dev/joke/Programming?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single&amount=10";
-const astro_url = "http://api.open-notify.org/astros.json"
+const astro_url = "http://api.open-notify.org/astros.json";
+const quotable_url = "https://api.quotable.io/random";
 
 async function getLocation(): Promise<Location> {
   return await (await fetch("http://api.open-notify.org/iss-now.json")).json();
@@ -40,3 +42,9 @@ export async function getAstronauts(): Promise<string[]> {
   const astroData = await getAstroData();
   return astroData.people.map(it => it.name);
 }
+
+export async function getQuotableQuote(): Promise<QuotableQuote> {
+  return await (await fetch(quotable_url)).json();
+}
+
+
