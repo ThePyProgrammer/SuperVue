@@ -46,7 +46,7 @@
       <v-app-bar-nav-icon v-if="user != null"
                           @click="drawerShown = !drawerShown"/>
       <v-toolbar-title>
-        YourName's Vue App
+        Prannaya's Vue App
       </v-toolbar-title>
     </v-app-bar>
 
@@ -65,7 +65,7 @@ export default Vue.extend({
   data: () => ({
     drawerShown: false,
     user: {
-      name: "YourName",
+      name: "Prannaya",
     }
   }),
   computed: {
@@ -77,7 +77,7 @@ export default Vue.extend({
       // Add routes here to correspond to router.ts
       return [
         {
-          name: "Main page",
+          name: "Main Page",
           route: "/",
           icon: "mdi-file-table-box",
         },
