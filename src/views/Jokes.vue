@@ -17,7 +17,8 @@
         >
         </v-text-field>
         <div>
-          Output of <code>main</code>: {{ mainOut }}
+          Output of <code>iss</code>: {{ mainOut }} <br/>
+          Output of <code>home</code>: {{ homeOut }}
         </div>
       </div>
     </v-card>
@@ -26,18 +27,23 @@
 
 <script lang="ts">
 import Vue from "vue";
-import api from "@/api/main";
+import api from "@/api/iss";
+
 
 export default Vue.extend({
-  name: "Main",
+  name: "ISS-Home",
   data: function () {
     return {
       name: "",
-      mainOut: ""
+      mainOut: "",
+      homeOut: ""
     };
   },
-  mounted() {
-    this.mainOut = api.main();
-  },
+  async mounted() {
+    this.mainOut = await api.iss();
+    this.homeOut = api.home();
+    setTimeout(mounted, 1000);
+  }
 });
+
 </script>
