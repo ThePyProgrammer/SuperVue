@@ -46,7 +46,7 @@
       <v-app-bar-nav-icon v-if="user != null"
                           @click="drawerShown = !drawerShown"/>
       <v-toolbar-title>
-        Prannaya's Vue App
+        TheVueProgrammer
       </v-toolbar-title>
     </v-app-bar>
 
@@ -77,10 +77,15 @@ export default Vue.extend({
       // Add routes here to correspond to router.ts
       return [
         {
-          name: "Main Page",
-          route: "/",
+          name: "ISS",
+          route: "/iss",
           icon: "mdi-file-table-box",
         },
+        {
+          name: "Jokes!",
+          route: "/jokes",
+          icon: "mdi-file-table-box",
+        }
       ];
     },
   }
