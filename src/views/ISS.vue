@@ -13,22 +13,14 @@
         </div>
       </div>
     </v-card>
-
-    <v-list
-      dense
-      nav>
-      <v-list-item v-for="astronaut in astronauts" v-bind:key="astronaut">
-        <v-card>
+        <v-spacer />
+        <v-card v-for="astronaut in astronauts" v-bind:key="astronaut">
           <v-card-title>
             <div>
-              <code>{{ astronaut }}</code>
+              {{ astronaut }}
             </div>
-            <v-spacer/>
           </v-card-title>
         </v-card>
-        <v-spacer />
-      </v-list-item>
-    </v-list>
   </v-container>
 </template>
 
