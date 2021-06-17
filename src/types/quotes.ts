@@ -29,3 +29,8 @@ export class Quote {
     this.content  = content;
   }
 }
+
+export class InspirationalQuote {
+  quote!: string
+  author!: string
+}
