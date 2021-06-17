@@ -77,14 +77,29 @@ export default Vue.extend({
       // Add routes here to correspond to router.ts
       return [
         {
+          name: "Home",
+          route: "/",
+          icon: "mdi-newspaper",
+        },
+        {
           name: "ISS",
           route: "/iss",
-          icon: "mdi-file-table-box",
+          icon: "mdi-space-station",
         },
         {
           name: "Jokes!",
           route: "/jokes",
-          icon: "mdi-file-table-box",
+          icon: "mdi-code-not-equal-variant",
+        },
+        {
+          name: "Quotes",
+          route: "/quotes",
+          icon: "mdi-format-quote-open",
+        },
+        {
+          name: "News",
+          route: "/news",
+          icon: "mdi-newspaper",
         }
       ];
     },
