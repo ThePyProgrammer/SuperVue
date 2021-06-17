@@ -65,7 +65,7 @@ export async function getQuotableQuotes(page: number): Promise<QuotableQuote[]> 
 export async function getAllQuotableQuotes(): Promise<Quote[]> {
   let arr = Array<Quote>();
   for(const page of range(1, 2)) {
-    arr = arr.concat((await getQuotableQuotes(page)).map(it => it.toQuote()));
+    arr = arr.concat((await getQuotableQuotes(page)).map(it => new Quote(it.author, it.content)));
   }
   return arr;
 }
@@ -84,5 +84,5 @@ export async function getAllTopStories(): Promise<Article[]> {
   for(const index of topStories) {
     arr.push(await getHackerNews(index));
   }
-  return arr.map(it => it.toArticle());
+  return arr.map(it => new Article(it.title, it.by, it.time, it.text));
 }
