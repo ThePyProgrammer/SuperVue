@@ -79,7 +79,7 @@ export default Vue.extend({
         {
           name: "Home",
           route: "/",
-          icon: "mdi-newspaper",
+          icon: "mdi-home-variant",
         },
         {
           name: "ISS",
