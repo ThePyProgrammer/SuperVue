@@ -12,7 +12,10 @@
         JavaScript enabled.
         Please enable it to continue.</strong>
 </noscript>
-<div id="app"></div>
+<div id="app">
+    <!-- bind to a data property named `code` -->
+    <highlightjs autodetect :code="code"></highlightjs>
+</div>
 <!-- built files will be auto injected -->
 <link rel="stylesheet" href="<%= BASE_URL %>font.css">
 <link rel="stylesheet" href="<%= BASE_URL %>materialdesignicons.min.css">
