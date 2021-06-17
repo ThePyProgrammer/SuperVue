@@ -70,7 +70,7 @@ export async function getQuotableQuotes(page: number): Promise<QuotableQuote[]> 
 
 export async function getAllQuotableQuotes(): Promise<Quote[]> {
   let arr = Array<Quote>();
-  for(const page of range(1, 2)) {
+  for(const page of range(1, 96)) {
     arr = arr.concat((await getQuotableQuotes(page)).map(it => new Quote(it.author, it.content)));
   }
   return arr;
