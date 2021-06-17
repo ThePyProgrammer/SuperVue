@@ -1,14 +1,20 @@
-import {Location} from "@/types/location";
-import {Position} from "@/types/position";
+import {Location, Position} from "@/types/position";
 import {JokeCollection} from "@/types/jokes";
-import {QuotableQuote} from "@/types/quotablequotes";
+import {QuotableQuote, QuotableQuoteCollection, Quote} from "@/types/quotablequotes";
+import {range} from "@/util/arrays";
+import {AstronautCollection} from "@/types/astronauts";
+import {Article, HackerNews} from "@/types/hackernews";
 
+const iss_url = "http://api.open-notify.org/iss-now.json";
 const joke_url = "https://v2.jokeapi.dev/joke/Programming?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single&amount=10";
 const astro_url = "http://api.open-notify.org/astros.json";
-const quotable_url = "https://api.quotable.io/random";
+const random_quotable_url = "https://api.quotable.io/random";
+const quotable_url = "https://api.quotable.io/quotes?page=";
+const top_stories_url = "https://hacker-news.firebaseio.com/v0/topstories.json";
+const hacker_news_url = "https://hacker-news.firebaseio.com/v0/item/";
 
 async function getLocation(): Promise<Location> {
-  return await (await fetch("http://api.open-notify.org/iss-now.json")).json();
+  return await (await fetch(iss_url)).json();
 }
 
 export async function getPosition(): Promise<Position> {
@@ -44,7 +50,39 @@ export async function getAstronauts(): Promise<string[]> {
 }
 
 export async function getQuotableQuote(): Promise<QuotableQuote> {
-  return await (await fetch(quotable_url)).json();
+  return await (await fetch(random_quotable_url)).json();
 }
 
+export async function getQuotableQuoteCollection(page: number): Promise<QuotableQuoteCollection> {
+  return await (await fetch(quotable_url+`${page}`)).json();
+}
 
+export async function getQuotableQuotes(page: number): Promise<QuotableQuote[]> {
+  const collection = await getQuotableQuoteCollection(page);
+  return collection.results;
+}
+
+export async function getAllQuotableQuotes(): Promise<Quote[]> {
+  let arr = Array<Quote>();
+  for(const page of range(1, 2)) {
+    arr = arr.concat((await getQuotableQuotes(page)).map(it => it.toQuote()));
+  }
+  return arr;
+}
+
+export async function getTopStories(): Promise<number[]> {
+  return await (await fetch(top_stories_url)).json();
+}
+
+export async function getHackerNews(item: number): Promise<HackerNews> {
+  return await (await fetch(hacker_news_url+`${item}.json`)).json();
+}
+
+export async function getAllTopStories(): Promise<Article[]> {
+  const topStories = await getTopStories();
+  const arr = Array<HackerNews>();
+  for(const index of topStories) {
+    arr.push(await getHackerNews(index));
+  }
+  return arr.map(it => it.toArticle());
+}
