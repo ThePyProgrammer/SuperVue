@@ -14,14 +14,11 @@
       nav>
       <v-list-item v-for="article in articles" v-bind:key="article.title">
         <v-card>
-          <v-card-title>
-            <div>
+          <v-card-title class="pa-8" style="word-break: normal">
               {{ article.title }}
-            </div>
-            <v-spacer/>
           </v-card-title>
           <div class="pa-8">
-            {{ article.getContent() }}
+            <span v-html="article.getContent()" />
           </div>
         </v-card>
         <v-spacer />
@@ -33,13 +30,14 @@
 <script lang="ts">
 import Vue from "vue";
 import { getAllTopStories } from "@/api/api";
+import { Article } from "@/types/hackernews";
 
 
 export default Vue.extend({
   name: "QuotableQuotes",
   data: function () {
     return {
-      articles: []
+      articles: Array<Article>()
     };
   },
   async mounted() {

@@ -31,6 +31,6 @@ export class Article {
   }
 
   getContent(): string {
-    return `<div style="float:right;">By ${this.by} on ${this.time}</div><div>${this.text}</div>`;
+    return `<div class="text-right pa-8">By ${this.by} on ${this.time}</div><br/><div>${this.text}</div>`;
   }
 }
