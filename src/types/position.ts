@@ -1,5 +1,15 @@
-import {convertTimestampToDate} from "@/util/datetimeutils";
-import {Coordinates} from "@/types/coordinates";
+import {convertTimestampToDate} from "@/util/datetime";
+
+export class Coordinates {
+  latitude!: string
+  longitude!: string
+}
+
+export class Location {
+  timestamp!: number
+  message!: string
+  iss_position!: Coordinates
+}
 
 export class Position {
   date!: Date
