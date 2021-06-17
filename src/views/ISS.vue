@@ -26,7 +26,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import api from "@/api/main";
+import api from "@/api/iss";
 
 export default Vue.extend({
   name: "ISS",
@@ -34,7 +34,7 @@ export default Vue.extend({
     return {
       name: "",
       main: "",
-      astronauts: []
+      astronauts: Array<string>()
     };
   },
   async mounted() {

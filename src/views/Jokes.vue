@@ -24,10 +24,8 @@
 <!--          </v-list-item-title>-->
 <!--        </v-list-item-content>-->
     <v-card>
-      <v-card-title>
-        <div>
+      <v-card-title class="pa-8" style="word-break: normal">
           <code>{{ joke }}</code>
-        </div>
         <v-spacer/>
       </v-card-title>
     </v-card>
@@ -46,7 +44,7 @@ export default Vue.extend({
   name: "JokesList",
   data: function () {
     return {
-      jokes: []
+      jokes: Array<string>()
     };
   },
   async mounted() {

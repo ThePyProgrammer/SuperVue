@@ -14,10 +14,8 @@
       nav>
       <v-list-item v-for="quote in quotes" v-bind:key="quote">
         <v-card>
-          <v-card-title>
-            <div>
-              {{ quote.content }}
-            </div>
+          <v-card-title class="pa-8" style="word-break: normal">
+            {{ quote.content }}
             <v-spacer/>
           </v-card-title>
           <div class="text-right pa-8">
@@ -33,13 +31,14 @@
 <script lang="ts">
 import Vue from "vue";
 import { getAllQuotableQuotes } from "@/api/api";
+import {Quote} from "@/types/quotes";
 
 
 export default Vue.extend({
   name: "QuotableQuotes",
   data: function () {
     return {
-      quotes: []
+      quotes: Array<Quote>()
     };
   },
   async mounted() {
