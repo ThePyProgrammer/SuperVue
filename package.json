@@ -8,14 +8,14 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@fontsource/fira-code": "^4.4.5",
+    "firacode": "^5.2.0",
     "vue": "^2.6.12",
     "vue-router": "^3.5.1",
-    "vuetify": "^2.5.1",
+    "vuetify": "^2.5.4",
     "vuex": "^3.6.2"
   },
   "devDependencies": {
-    "@fontsource/fira-code": "^4.4.5",
+    "firacode": "^5.2.0",
     "@typescript-eslint/eslint-plugin": "^4.25.0",
     "@typescript-eslint/parser": "^4.25.0",
     "@vue/cli-plugin-eslint": "~4.5.13",
