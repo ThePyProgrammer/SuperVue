@@ -9,7 +9,7 @@
       </v-card-title>
       <div class="pa-8">
         <div>
-          {{ mainOut }}
+          {{ main }} The following are the Astronauts currently aboard the ISS!
         </div>
       </div>
     </v-card>
@@ -37,16 +37,16 @@ import Vue from "vue";
 import api from "@/api/main";
 
 export default Vue.extend({
-  name: "ISS-Home",
+  name: "ISS",
   data: function () {
     return {
       name: "",
-      mainOut: "",
+      main: "",
       astronauts: []
     };
   },
   async mounted() {
-    this.mainOut = await api.main();
+    this.main = await api.main();
     this.astronauts = await api.getAstronauts();
   }
 });
