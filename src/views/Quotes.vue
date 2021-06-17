@@ -18,11 +18,11 @@
             <div>
               {{ quote.content }}
             </div>
-            <div style="float:right;">
-              ~ {{ quote.author }}
-            </div>
             <v-spacer/>
           </v-card-title>
+          <div class="text-right pa-8">
+            ~ {{ quote.author }}
+          </div>
         </v-card>
         <v-spacer />
       </v-list-item>
@@ -39,7 +39,7 @@ export default Vue.extend({
   name: "QuotableQuotes",
   data: function () {
     return {
-      articles: []
+      quotes: []
     };
   },
   async mounted() {
