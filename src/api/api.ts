@@ -1,6 +1,6 @@
 import {Location, Position} from "@/types/position";
 import {JokeCollection} from "@/types/jokes";
-import {QuotableQuote, QuotableQuoteCollection, Quote} from "@/types/quotablequotes";
+import {InspirationalQuote, QuotableQuote, QuotableQuoteCollection, Quote} from "@/types/quotes";
 import {range} from "@/util/arrays";
 import {AstronautCollection} from "@/types/astronauts";
 import {Article, HackerNews} from "@/types/hackernews";
@@ -12,6 +12,7 @@ const random_quotable_url = "https://api.quotable.io/random";
 const quotable_url = "https://api.quotable.io/quotes?page=";
 const top_stories_url = "https://hacker-news.firebaseio.com/v0/topstories.json";
 const hacker_news_url = "https://hacker-news.firebaseio.com/v0/item/";
+const inspiration_url = "https://inspiration.goprogram.ai/";
 
 async function getLocation(): Promise<Location> {
   return await (await fetch(iss_url)).json();
@@ -53,6 +54,11 @@ export async function getQuotableQuote(): Promise<QuotableQuote> {
   return await (await fetch(random_quotable_url)).json();
 }
 
+export async function getRandomQuotableQuote(): Promise<Quote> {
+  const quote = await getQuotableQuote();
+  return new Quote(quote.author, quote.content);
+}
+
 export async function getQuotableQuoteCollection(page: number): Promise<QuotableQuoteCollection> {
   return await (await fetch(quotable_url+`${page}`)).json();
 }
@@ -85,4 +91,8 @@ export async function getAllTopStories(): Promise<Article[]> {
     arr.push(await getHackerNews(index));
   }
   return arr.map(it => new Article(it.title, it.by, it.time, it.text));
+}
+
+export async function getInspirationalQuote(): Promise<InspirationalQuote> {
+  return await (await fetch(inspiration_url)).json();
 }
