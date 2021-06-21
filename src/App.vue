@@ -48,6 +48,8 @@
       <v-toolbar-title>
         TheVueProgrammer
       </v-toolbar-title>
+      <v-switch v-model="$vuetify.theme.dark" color="orange" label="Dark Mode"
+                style="margin: 15px 15px 0 20px; display: block"/>
     </v-app-bar>
 
     <v-content>
@@ -80,6 +82,11 @@ export default Vue.extend({
           name: "Home",
           route: "/",
           icon: "mdi-home-variant",
+        },
+        {
+          name: "GitHub",
+          route: "/github",
+          icon: "mdi-github",
         },
         {
           name: "ISS",
