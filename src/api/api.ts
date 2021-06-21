@@ -4,6 +4,7 @@ import {InspirationalQuote, QuotableQuote, QuotableQuoteCollection, Quote} from 
 import {range} from "@/util/arrays";
 import {AstronautCollection} from "@/types/astronauts";
 import {Article, HackerNews} from "@/types/hackernews";
+import {Repo, User } from "@/types/github";
 
 const iss_url = "http://api.open-notify.org/iss-now.json";
 const joke_url = "https://v2.jokeapi.dev/joke/Programming?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single&amount=10";
@@ -96,3 +97,14 @@ export async function getAllTopStories(): Promise<Article[]> {
 export async function getInspirationalQuote(): Promise<InspirationalQuote> {
   return await (await fetch(inspiration_url)).json();
 }
+
+export async function getUser(username: string): Promise<User> {
+  return await (await fetch(
+    "https://api.github.com/users/" + username)).json();
+}
+
+export async function getRepos(username: string): Promise<Repo[]> {
+  return await (await fetch(
+    `https://api.github.com/users/${username}/repos?per_page=100`)).json();
+}
+
